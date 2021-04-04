@@ -1,27 +1,31 @@
 <template lang="">
     <div class="CheckItemBox">
-    <titles class="tagTitle"> {{title}}</titles>    
+    <p class="tagTitle"> {{title}}</p>    
      <CheckItem v-for="userTag in userTags" :userTag="userTag" :key="userTag" class="CheckItem"></CheckItem>
     </div>
 </template>
 <script>
-import CheckItem from '@/components/CheckItem.vue'
+import CheckItem from "@/components/CheckItem.vue";
 export default {
-    props:['title', 'userTags'],
-    components:{
-        CheckItem,
-    }
-}
+
+  name: "CheckItemBox",
+  props: ["title", "userTags"],
+  components: {
+    CheckItem,
+  },
+};
 </script>
 <style >
-    .CheckItemBox {
-        background-color: red;
-        display: flex;
-        flex-direction: column;
-        /* justify-content:left; */
-        align-items:flex-start;
-    }
-    .tagTitle {
-        font-size:1.25rem
-    }
+.CheckItemBox {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  /* justify-content:left; */
+  align-items: flex-start;
+  margin-top: 5px;
+}
+.tagTitle {
+  text-indent: 0.25rem;
+  font-size: 1.25rem;
+}
 </style>

@@ -6,16 +6,18 @@
 </template>
 <script>
 export default {
-    props:{
-        userTag:{
-            type:String,
-            required:true
-        }
-    }
-}
+  name: "CheckItem",
+  props: {
+    userTag: {
+      type: String,
+      required: true,
+    },
+  },
+};
 </script>
 <style scoped>
-    input {
-        margin-right: 10px;
-    }
+input {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
 </style>
