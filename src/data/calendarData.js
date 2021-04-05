@@ -1,3 +1,9 @@
+import * as dayjs from "dayjs";
+import * as dayOfYear from "dayjs/plugin/dayOfYear";
+import * as weekOfYear from "dayjs/plugin/weekOfYear";
+dayjs.extend(dayOfYear);
+dayjs.extend(weekOfYear);
+
 const MONTHDAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const SUMMONTHDAYS = MONTHDAYS.reduce(
   (res, cur, index) => {
@@ -6,23 +12,36 @@ const SUMMONTHDAYS = MONTHDAYS.reduce(
     return res;
   },
   [0]
-)
+);
 const date = new Date();
-let MONTH = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+let WEEK = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
 let day = date.getDate();
 let month = date.getMonth();
 let year = date.getFullYear();
 let weekDay = date.getDay(); // start on Sunday (0=>Sunday)
-let FIRSTWEEKDAY = new Date(year, month, 0).getDay();
+let FIRSTWEEKDAY = new Date(year, month, 1).getDay();
 let LASTTWEEKDAY = new Date(year, month, MONTHDAYS[month]).getDay();
-let preDaysStart =
-  month !== 0
-    ? MONTHDAYS[month - 1] - FIRSTWEEKDAY - 1
-    : MONTHDAYS[11] - FIRSTWEEKDAY - 1;
+let preDaysEnd = month !== 0 ? MONTHDAYS[month - 1] : MONTHDAYS[11];
 let remainDaysCount = 6 - LASTTWEEKDAY;
 
+let getDisplayDays = (month) => {
+  let displayDays = [];
+  for (let i = 0; i < MONTHDAYS[month]; i++) {
+    displayDays.push(i + 1);
+  }
+  displayDays = new Array(FIRSTWEEKDAY)
+    .fill(0)
+    .map((val, index) => preDaysEnd - FIRSTWEEKDAY + index+1)
+    .concat(displayDays);
+  let nextMonthDay = 1;
+  while (displayDays.length < 42) {
+    displayDays.push(nextMonthDay++);
+  }
+  return displayDays;
+};
+let displayDays = getDisplayDays(month);
 let calendarData = {
-  MONTH,
+  WEEK,
   day,
   month,
   year,
@@ -30,8 +49,13 @@ let calendarData = {
   FIRSTWEEKDAY,
   LASTTWEEKDAY,
   SUMMONTHDAYS,
-  preDaysStart,
+  preDaysEnd,
   remainDaysCount,
   MONTHDAYS,
+  displayDays,
+  getDisplayDays
 };
+// export let week = WEEK;
+//每个月份显示 42 天 ,把之前或之后的填为' '
+
 export default calendarData;
