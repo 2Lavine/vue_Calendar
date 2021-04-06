@@ -27,15 +27,30 @@ let remainDaysCount = 6 - LASTTWEEKDAY;
 let getDisplayDays = (month) => {
   let displayDays = [];
   for (let i = 0; i < MONTHDAYS[month]; i++) {
-    displayDays.push(i + 1);
+    // displayDays.push(i + 1);
+    displayDays.push({
+      month: month,
+      day: i + 1,
+      id: SUMMONTHDAYS[month] + i + 1,
+    });
   }
   displayDays = new Array(FIRSTWEEKDAY)
     .fill(0)
-    .map((val, index) => preDaysEnd - FIRSTWEEKDAY + index+1)
+    .map((val, index) => {
+      return {
+        month: month - 1,
+        day: preDaysEnd - FIRSTWEEKDAY + index + 1,
+        id: SUMMONTHDAYS[month - 1] + preDaysEnd - FIRSTWEEKDAY + index + 1,
+      };
+    })
     .concat(displayDays);
   let nextMonthDay = 1;
   while (displayDays.length < 42) {
-    displayDays.push(nextMonthDay++);
+    displayDays.push({
+      month: month + 1,
+      day: nextMonthDay++,
+      id: SUMMONTHDAYS[month + 1] + nextMonthDay - 1,
+    });
   }
   return displayDays;
 };
@@ -53,7 +68,7 @@ let calendarData = {
   remainDaysCount,
   MONTHDAYS,
   displayDays,
-  getDisplayDays
+  getDisplayDays,
 };
 // export let week = WEEK;
 //每个月份显示 42 天 ,把之前或之后的填为' '

@@ -1,12 +1,12 @@
 <template lang="">
   <div class="MiniCalendar">
     <div class="MiniCalendarSelector">
-      <div class="LastMonth"></div>
+      <div class="DateSelector LastMonth"></div>
       <div class="MiniCalendarSelectorText">
         {{ calendarData.year }}年{{ calendarData.month + 1 }}月
       </div>
 
-      <div class="nextMonth"></div>
+      <div class="DateSelector nextMonth"></div>
     </div>
     <div class="MiniCalendarTitle">
       <div class="MiniCalendarItem" v-for="day in calendarData.WEEK" :key="day">
@@ -16,10 +16,11 @@
     <div class="MiniCalendarContent">
       <div
         class="MiniCalendarItem"
-        v-for="day in calendarData.displayDays"
-        :key="day"
+        v-for="dayInfo in calendarData.displayDays"
+        :class="dayInfo.month == calendarData.month ? 'active' : ''"
+        :key="dayInfo.id"
       >
-        {{ day }}
+        {{ dayInfo.day }}
       </div>
     </div>
   </div>
@@ -59,7 +60,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: pink;
+  background-color: white;
   width: 21rem;
 }
 .MiniCalendarSelector {
@@ -72,20 +73,22 @@ export default {
 .MiniCalendarItem {
   width: 3rem;
 }
-.LastMonth {
+
+.DateSelector {
   width: 0.5rem;
   height: 0.5rem;
   border-top: 1px solid;
   border-left: 1px solid;
   display: inline-block;
-  transform: rotate(-45deg) translateX(-0.5rem);
+  cursor: pointer;
+}
+.LastMonth {
+  transform: translateX(1rem) rotate(-45deg);
 }
 .nextMonth {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-top: 1px solid;
-  border-left: 1px solid;
-  display: inline-block;
-  transform: rotate(-225deg);
+  transform: translateX(-1rem) rotate(-225deg);
+}
+.active {
+  font-weight: bold;
 }
 </style>
