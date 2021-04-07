@@ -5,8 +5,7 @@
       <div class="MiniCalendarSelectorText">
         {{ calendarData.year }}年{{ calendarData.month + 1 }}月
       </div>
-
-      <div class="DateSelector nextMonth"></div>
+      <div class="DateSelector nextMonth" ></div>
     </div>
     <div class="MiniCalendarTitle">
       <div class="MiniCalendarItem" v-for="day in calendarData.WEEK" :key="day">
