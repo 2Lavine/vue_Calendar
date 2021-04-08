@@ -5,7 +5,7 @@
       <div class="MiniCalendarSelectorText">
         {{ calendarData.year }}年{{ calendarData.month + 1 }}月
       </div>
-      <div class="DateSelector nextMonth" ></div>
+      <div class="DateSelector nextMonth"></div>
     </div>
     <div class="MiniCalendarTitle">
       <div class="MiniCalendarItem" v-for="day in calendarData.WEEK" :key="day">
@@ -25,9 +25,9 @@
   </div>
 </template>
 <script>
-import calendarData from "@/data/calendarData";
-console.log(calendarData);
-let { year, month, FIRSTWEEKDAY, WEEK, preDaysEnd, displayDays } = calendarData;
+import { year, month, FIRSTWEEKDAY, WEEK, preDaysEnd, displayDays }  from "@/data/calendarData";
+// console.log(calendarData);
+// let { year, month, FIRSTWEEKDAY, WEEK, preDaysEnd, displayDays } = calendarData;
 export default {
   name: "MiniCalendar",
   data() {
@@ -52,6 +52,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 0.8rem;
 }
 .MiniCalendarTitle,
 .MiniCalendarSelector,
@@ -59,8 +60,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: white;
-  width: 21rem;
+  width: 100%;
 }
 .MiniCalendarSelector {
   justify-content: center;
@@ -70,7 +70,7 @@ export default {
   flex: 1;
 }
 .MiniCalendarItem {
-  width: 3rem;
+  width: 14.2%;
 }
 
 .DateSelector {
