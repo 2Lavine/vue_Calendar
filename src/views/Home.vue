@@ -1,20 +1,28 @@
 <template>
   <div class="home">
     <Nav></Nav>
-    <mini-calendar></mini-calendar>
+    <Calendar class="Calendar"></Calendar>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Nav from "@/components/Nav.vue";
-import MiniCalendar from "../components/MiniCalendar.vue";
+import Calendar from "@/components/Calendar.vue";
 
 export default {
   name: "Home",
   components: {
     Nav,
-    MiniCalendar,
+    Calendar,
   },
 };
 </script>
+<style>
+.home {
+  display: flex;
+}
+.Calendar {
+  flex: 1;    
+}
+</style>

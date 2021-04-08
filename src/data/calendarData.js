@@ -55,7 +55,11 @@ let getDisplayDays = (month) => {
   return displayDays;
 };
 let displayDays = getDisplayDays(month);
-let calendarData = {
+
+// export let week = WEEK;
+//每个月份显示 42 天 ,把之前或之后的填为' '
+
+export {
   WEEK,
   day,
   month,
@@ -70,7 +74,3 @@ let calendarData = {
   displayDays,
   getDisplayDays,
 };
-// export let week = WEEK;
-//每个月份显示 42 天 ,把之前或之后的填为' '
-
-export default calendarData;
