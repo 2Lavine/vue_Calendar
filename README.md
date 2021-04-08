@@ -1,2 +1,2 @@
 # calendar
-A Web Application that mimics Apple's calendar
+A Web Application of calendar
