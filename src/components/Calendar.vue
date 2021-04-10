@@ -1,9 +1,16 @@
 <template>
   <div class="Calendar">
     <CalendarHead :month="4" :year="2021"></CalendarHead>
-    <ul>
+    <table>
+      <thead>
+        <tr>
+          <th v-for="weekDay in WEEK" :key="weekDay">{{ weekDay }}</th>
+        </tr>
+      </thead>
+    </table>
+    <!-- <ul>
       <li v-for="weekDay in WEEK" :key="weekDay">{{ weekDay }}</li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 <script>
