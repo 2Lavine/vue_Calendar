@@ -1,29 +1,23 @@
 <template>
   <div class="Calendar">
     <CalendarHead :month="4" :year="2021"></CalendarHead>
-    <table>
-      <thead>
-        <tr>
-          <th v-for="weekDay in WEEK" :key="weekDay">{{ weekDay }}</th>
-        </tr>
-      </thead>
-    </table>
-    <!-- <ul>
-      <li v-for="weekDay in WEEK" :key="weekDay">{{ weekDay }}</li>
-    </ul> -->
+
+    <CalendarMonth v-if="mode == 'month'"></CalendarMonth>
+    <CalendarDay v-if="mode == 'day'"></CalendarDay>
   </div>
 </template>
 <script>
-import { WEEK } from "@/data/calendarData";
 import CalendarHead from "@/components/CalendarHead";
+import CalendarMonth from "@/components/CalendarMonth";
+import CalendarDay from "@/components/CalendarDay";
 export default {
   name: "Calendar",
-  components: { CalendarHead },
   data() {
     return {
-      WEEK,
+      mode: "day",
     };
   },
+  components: { CalendarHead, CalendarMonth, CalendarDay },
 };
 </script>
 <style>

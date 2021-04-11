@@ -13,6 +13,32 @@ const SUMMONTHDAYS = MONTHDAYS.reduce(
   },
   [0]
 );
+const DAYHOURS = [
+  '00',
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+  '06',
+  '07',
+  '08',
+  '09',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+  '16',
+  '17',
+  '18',
+  '19',
+  '20',
+  '21',
+  '22',
+  '23',
+];
 const date = new Date();
 let WEEK = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
 let day = date.getDate();
@@ -68,6 +94,7 @@ export {
   FIRSTWEEKDAY,
   LASTTWEEKDAY,
   SUMMONTHDAYS,
+  DAYHOURS,
   preDaysEnd,
   remainDaysCount,
   MONTHDAYS,
