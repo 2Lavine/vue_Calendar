@@ -1,8 +1,9 @@
 <template>
   <div class="CalendarDay">
     <table>
-      <tr v-for="hour in DAYHOURS" :key="hour">
-        {{hour}}:00
+      <tr class="CalendarRow" v-for="hour in DAYHOURS" :key="hour">
+        <td class="CalendarRowHead">{{ hour }}:00</td>
+        <td class="CalendarCell"></td>
       </tr>
     </table>
   </div>
@@ -20,12 +21,26 @@ export default {
 <style>
 .CalendarDay {
   overflow: auto;
-  height: 80vh;
+  height: 90vh;
 }
 .CalendarDay > table {
+  margin-top: 1rem;
   table-layout: fixed;
+  border-collapse: collapse;
 }
-.CalendarDay > table tr {
+.CalendarRow {
   height: 10vh;
+}
+.CalendarRowHead {
+  text-align: center;
+  vertical-align: top;
+  transform: translateY(-0.75rem);
+  min-width: 5rem;
+  color: rgba(189,189,189);
+  /* font-size:1rem; */
+}
+.CalendarCell {
+  border-top: rgb(229,229,229) 1px solid;
+  width: 100%;
 }
 </style>
