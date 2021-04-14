@@ -14,4 +14,9 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.CalendarSelector {
+  display: flex;
+  flex-direction: row;
+}
+</style>
