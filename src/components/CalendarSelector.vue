@@ -19,4 +19,8 @@ export default {
   display: flex;
   flex-direction: row;
 }
+.active{
+  background-color:whitesmoke;
+  border-radius: 15%;
+}
 </style>
