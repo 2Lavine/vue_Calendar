@@ -20,7 +20,7 @@ export default {
   flex-direction: row;
 }
 .active{
-  background-color:whitesmoke;
+  background-color:gray;
   border-radius: 15%;
 }
 </style>
