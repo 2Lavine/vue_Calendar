@@ -1,16 +1,13 @@
 <template>
   <div class="Calendar">
+    <CalendarSelector class='CalendarSelector'></CalendarSelector>
     <CalendarHead :month="4" :year="2021"></CalendarHead>
-    <CalendarSelector></CalendarSelector>
-    <CalendarMonth v-if="mode == 'month'"></CalendarMonth>
-    <CalendarDay v-if="mode == 'day'"></CalendarDay>
+    <router-view></router-view>
   </div>
 </template>
 <script>
 import CalendarSelector from "@/components/CalendarSelector";
 import CalendarHead from "@/components/CalendarHead";
-import CalendarMonth from "@/components/CalendarMonth";
-import CalendarDay from "@/components/CalendarDay";
 export default {
   name: "Calendar",
   data() {
@@ -18,7 +15,7 @@ export default {
       mode: "day",
     };
   },
-  components: { CalendarHead, CalendarMonth, CalendarDay, CalendarSelector },
+  components: { CalendarHead,  CalendarSelector },
 };
 </script>
 <style>
@@ -29,4 +26,8 @@ export default {
 .CalendarHead {
   align-self: start;
 }
+.CalendarSelector{
+  align-self: center;
+}
+
 </style>
