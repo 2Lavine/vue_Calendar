@@ -12,6 +12,6 @@ export default {
 .CalendarHead {
   font-size: 2rem;
   font-weight: bolder;
-  margin: 1.5rem;
+  margin: 1rem;
 }
 </style>

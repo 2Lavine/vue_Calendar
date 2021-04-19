@@ -38,18 +38,18 @@ export default {
   flex-direction: row;
   width: 16rem;
   border: rgb(223, 220, 221) solid 1px;
-  border-radius: 5%;
+  border-radius: 0.5rem;
 }
 .active {
   background-color: rgb(223, 220, 221);
-  border-radius: 10%;
+  border-radius: 0.5rem;;
 }
 .selector {
   flex: 1;
-  border-radius: 10%;
+  border-radius: 0.1rem;
   padding: 0.1rem;
   cursor: pointer;
-  color: rgb(204, 201, 202);
+  color: rgb(172,169,170);
 }
 .selector:not(:last-child) {
   border-right: rgb(223, 220, 221) solid 1px;

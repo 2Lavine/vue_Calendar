@@ -29,4 +29,9 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {
+margin: 0;
+padding: 0;
+}
+
 </style>
