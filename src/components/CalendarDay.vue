@@ -1,10 +1,15 @@
 <template>
   <div class="CalendarDay">
     <table>
-      <tr class="CalendarRow" v-for="hour in DAYHOURS" :key="hour">
+      <tr
+        class="CalendarRow"
+        v-for="hour in DAYHOURS"
+        :key="hour"
+        @click="addEventItem($event, hour)"
+      >
         <td class="CalendarRowHead">{{ hour }}:00</td>
         <td class="CalendarCell">
-          <Event v-if="hour == '01'" :color="'255,0,0'"></Event>
+          <Event v-if="eventHours[hour] == true" :color="'255,0,0'"></Event>
         </td>
       </tr>
     </table>
@@ -17,9 +22,23 @@ export default {
   data() {
     return {
       DAYHOURS: DAYHOURS,
+      clickTime: { last: 0, now: 0 },
+      eventHours: {},
     };
   },
+
   components: { Event },
+  methods: {
+    addEventItem(event, hour) {
+      this.clickTime.now = event.timeStamp;
+      if (this.clickTime.last != 0) {
+        if (this.clickTime.now - this.clickTime.last < 1000) {
+          this.eventHours = { ...this.eventHours, [hour]: true };
+        }
+      }
+      this.clickTime.last = event.timeStamp;
+    },
+  },
 };
 </script>
 <style>
