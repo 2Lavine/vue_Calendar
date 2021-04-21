@@ -3,13 +3,17 @@
     <table>
       <tr
         class="CalendarRow"
-        v-for="hour in DAYHOURS"
+        v-for="(hour, index) in DAYHOURS"
         :key="hour"
         @click="addEventItem($event, hour)"
       >
         <td class="CalendarRowHead">{{ hour }}:00</td>
         <td class="CalendarCell">
-          <Event v-if="eventHours[hour] == true" :color="'255,0,0'"></Event>
+          <Event
+            v-if="eventHours[hour] == true"
+            :color="'255,0,0'"
+            :height="eventHeight[index]"
+          ></Event>
         </td>
       </tr>
     </table>
@@ -24,6 +28,7 @@ export default {
       DAYHOURS: DAYHOURS,
       clickTime: { last: 0, now: 0 },
       eventHours: {},
+      eventHeight: Array(24).fill('10vh'),
     };
   },
 
@@ -66,5 +71,6 @@ export default {
   border-top: rgb(229, 229, 229) 1px solid;
   width: 100%;
   height: 10vh;
+  vertical-align: top;
 }
 </style>
