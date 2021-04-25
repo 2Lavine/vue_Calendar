@@ -49,8 +49,10 @@ export default {
 </script>
 <style>
 .Event {
+  position: absolute;
   padding: 0;
-  height: 100%;
+  width: 90rem;
+  left: 5rem;
   overflow: hidden;
   border-radius: 0.5rem;
   cursor: row-resize;

@@ -1,7 +1,10 @@
 <template>
   <div class="CalendarDay">
-    <table>
-      <template v-for="(hour, index) in DAYHOURS">
+    <table class="CalendarDaytable">
+      <div v-for="(hour, index) in eventHours" :key="index + '_' + hour">
+        <Event :color="'255,0,0'" :height="'4rem'"></Event>
+      </div>
+      <template v-for="hour in DAYHOURS">
         <tr
           class="CalendarRow"
           v-for="minute in MINUTES"
@@ -11,13 +14,7 @@
           <td class="CalendarRowHead" v-if="minute == '00'">
             {{ hour }}:{{ minute }}
           </td>
-          <td class="CalendarCell" v-if="minute == '00'">
-            <Event
-              v-if="eventHours[hour] == true"
-              :color="'255,0,0'"
-              :height="eventHeight[index]"
-            ></Event>
-          </td>
+          <td class="CalendarCell" v-if="minute == '00'"></td>
         </tr>
       </template>
     </table>
@@ -32,7 +29,7 @@ export default {
       DAYHOURS: DAYHOURS,
       MINUTES: ["00", "15", "30", "45"],
       clickTime: { last: 0, now: 0 },
-      eventHours: {},
+      eventHours: [],
       eventHeight: Array(24).fill("1.5rem"),
     };
   },
@@ -43,7 +40,9 @@ export default {
       this.clickTime.now = event.timeStamp;
       if (this.clickTime.last != 0) {
         if (this.clickTime.now - this.clickTime.last < 1000) {
-          this.eventHours = { ...this.eventHours, [hour]: true };
+          this.eventHours = [...this.eventHours, hour];
+          console.log(this.eventHours);
+          // document.getElementById("CalendarDaytable").appendChild(Event);
         }
       }
       this.clickTime.last = event.timeStamp;
@@ -55,6 +54,7 @@ export default {
 .CalendarDay {
   overflow: auto;
   height: 90vh;
+  position: relative;
 }
 .CalendarDay > table {
   margin-top: 1rem;
@@ -74,7 +74,7 @@ export default {
 }
 .CalendarCell {
   border-top: rgb(229, 229, 229) 1px solid;
-  width: 100%;
+  width: 95rem;
   vertical-align: top;
 }
 </style>
