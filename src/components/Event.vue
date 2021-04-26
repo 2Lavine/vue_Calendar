@@ -12,7 +12,7 @@
 <script>
 export default {
   name: "Event",
-  props: ["color", "height", "index"],
+  props: ["color", "height", "index", "top"],
   data() {
     return {
       resizeClick: {
@@ -24,24 +24,25 @@ export default {
         "background-color": "rgba(" + this.color + ",0.5)",
         "border-left": "rgb(" + this.color + ")solid 0.25rem",
         height: this.height,
+        top: this.top,
       },
     };
   },
   methods: {
     selectEvent(event) {
       if (event.target.className == "Event") {
-        console.log(this.index, event.target);
-        this.resizeClick.begin = event.layerY;
+        this.tag = true;
       }
     },
     resizeEvent(event) {
-      if (event.target.className == "Event") {
-        // console.log(event);
+      if (event.target.className == "Event" && this.tag) {
+        console.log(event);
+        this.eventStyle.height = "8rem";
       }
     },
     completeResize(event) {
       if (event.target.className == "Event") {
-        console.log(233);
+        this.tag = false;
       }
     },
   },

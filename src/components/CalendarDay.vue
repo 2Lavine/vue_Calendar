@@ -2,7 +2,11 @@
   <div class="CalendarDay">
     <table class="CalendarDaytable">
       <div v-for="(hour, index) in eventHours" :key="index + '_' + hour">
-        <Event :color="'255,0,0'" :height="'4rem'"></Event>
+        <Event
+          :color="'255,0,0'"
+          :height="'4rem'"
+          :top="`${hour * 6+0.8}rem`"
+        ></Event>
       </div>
       <template v-for="hour in DAYHOURS">
         <tr
