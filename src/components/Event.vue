@@ -6,7 +6,9 @@
     @mouseup="completeResize"
     @mousemove="resizeEvent"
   >
+    <div></div>
     <div class="content">{{ content }}</div>
+    <div></div>
   </div>
 </template>
 <script>
@@ -32,18 +34,22 @@ export default {
     selectEvent(event) {
       if (event.target.className == "Event") {
         this.tag = true;
+        this.layerY = event.layerY;
       }
     },
     resizeEvent(event) {
-      if (event.target.className == "Event" && this.tag) {
-        console.log(event);
-        this.eventStyle.height = "8rem";
+      if (this.tag) {
+        let rem = window
+          .getComputedStyle(document.documentElement)
+          .fontSize.slice(0, -2);
+        // console.log(event, rem);
+        this.eventStyle.height =
+          this.height.slice(0, -3) * rem + event.layerY - this.layerY + "px";
       }
     },
     completeResize(event) {
-      if (event.target.className == "Event") {
-        this.tag = false;
-      }
+      console.log("here we go", event);
+      this.tag = false;
     },
   },
 };
@@ -57,10 +63,14 @@ export default {
   overflow: hidden;
   border-radius: 0.5rem;
   cursor: row-resize;
+  /* display: flex;
+  justify-content: center;
+  flex-direction: column; */
 }
 .content {
   cursor: default;
-  height: 80%;
-  margin: 0.5rem 0;
+  height:90%;
+  margin: 3px 0;
 }
+
 </style>

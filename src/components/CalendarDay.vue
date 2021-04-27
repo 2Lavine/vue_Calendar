@@ -67,6 +67,7 @@ export default {
 }
 .CalendarRow {
   height: 1.5rem;
+  user-select: none;
 }
 .CalendarRowHead {
   text-align: center;
