@@ -4,8 +4,8 @@
       <div v-for="(hour, index) in eventHours" :key="index + '_' + hour">
         <Event
           :color="'255,0,0'"
-          :height="'4rem'"
-          :top="`${hour * 6+0.8}rem`"
+          :height="height"
+          :top="`${(hour * 6 + 0.8) * 16}px`"
         ></Event>
       </div>
       <template v-for="hour in DAYHOURS">
@@ -35,6 +35,7 @@ export default {
       clickTime: { last: 0, now: 0 },
       eventHours: [],
       eventHeight: Array(24).fill("1.5rem"),
+      height: "64px",
     };
   },
 
