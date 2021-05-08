@@ -1,22 +1,19 @@
 <template>
   <div class="CalendarDay">
     <table class="CalendarDaytable">
-      <div v-for="(hour, index) in eventHours" :key="index + '_' + hour">
+      <div v-for="(event, index) in events" :key="index + '_' + event.eventHour">
         <Event
           :color="'255,0,0'"
           :height="height"
-          :top="`${(hour * 6 + 0.8) * 16}px`"
-        ></Event>
+          :top="`${(event.eventHour * 6 + 0.8) * 16}px`"
+          :id="event.id"
+          :key="event.id"
+        >
+        </Event>
       </div>
       <template v-for="hour in DAYHOURS">
-        <tr
-          class="CalendarRow"
-          :key="hour"
-          @click="addEventItem($event, hour)"
-        >
-          <td class="CalendarRowHead" >
-            {{ hour }}:00
-          </td>
+        <tr class="CalendarRow" :key="hour" @click="addEventItem($event, hour)">
+          <td class="CalendarRowHead">{{ hour }}:00</td>
           <td class="CalendarCell"></td>
         </tr>
       </template>
@@ -32,9 +29,10 @@ export default {
       DAYHOURS: DAYHOURS,
       // MINUTES: ["00", "15", "30", "45"],
       clickTime: { last: 0, now: 0 },
-      eventHours: [],
+      events: [],
       eventHeight: Array(24).fill("1.5rem"),
       height: "64px",
+      id: 0,
     };
   },
 
@@ -43,9 +41,9 @@ export default {
     addEventItem(event, hour) {
       this.clickTime.now = event.timeStamp;
       if (this.clickTime.last != 0) {
-        if (this.clickTime.now - this.clickTime.last < 1000) {
-          this.eventHours = [...this.eventHours, hour];
-          console.log(this.eventHours);
+        if (this.clickTime.now - this.clickTime.last < 500) {
+          this.events = [...this.events, { eventHour: hour, id: this.id++ }];
+          console.log(this.events);
           // document.getElementById("CalendarDaytable").appendChild(Event);
         }
       }

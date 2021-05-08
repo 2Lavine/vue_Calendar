@@ -7,7 +7,20 @@
       @drag="resizeTopEvent"
       @dragend="completeResize"
     ></div>
-    <div class="content">{{ content }}</div>
+
+    <div v-show="!isEditing" class="content" @click="editContent">
+      {{ content }}
+    </div>
+    <input
+      v-show="isEditing"
+      :id="'editor' + id"
+      class="editor"
+      contenteditable="true"
+      :value="content"
+      @keyup.enter="showContent"
+      @blur="showContent"
+    />
+
     <div
       class="bottomBorder"
       draggable="true"
@@ -18,21 +31,28 @@
   </div>
 </template>
 <script>
+// import Vue from vue;
 export default {
   name: "Event",
-  props: ["color", "height", "index", "top"],
+  props: ["color", "height", "index", "top", "id"],
   data() {
     return {
       resizeClick: {
         begin: "",
         end: "",
       },
+      isEditing: false,
       content: "hello world",
       eventStyle: {
         "background-color": "rgba(" + this.color + ",0.5)",
         "border-left": "rgb(" + this.color + ")solid 0.25rem",
         height: this.height,
+
         top: this.top,
+      },
+      clickTime: {
+        now: 0,
+        last: 0,
       },
     };
   },
@@ -87,6 +107,27 @@ export default {
       this.tag = false;
       this.layerY = event.layerY;
     },
+    editContent(event) {
+      this.clickTime.now = event.timeStamp;
+      if (this.clickTime.last != 0) {
+        if (this.clickTime.now - this.clickTime.last < 1000) {
+          this.isEditing = true;
+          this.$nextTick(function () {
+            document.getElementById(`editor${this.id}`).focus();
+          });
+        }
+      }
+      this.clickTime.last = event.timeStamp;
+    },
+    showContent() {
+      // console.log(event.value, event);
+      console.log(
+        document.getElementById(`editor${this.id}`),
+        `editor${this.id}`
+      );
+      this.content = document.getElementById(`editor${this.id}`).value;
+      this.isEditing = false;
+    },
   },
 };
 </script>
@@ -94,7 +135,7 @@ export default {
 .Event {
   position: absolute;
   padding: 0;
-  width: 90rem;
+  width: 82rem;
   left: 5rem;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -105,13 +146,20 @@ export default {
 }
 .content {
   cursor: default;
+
   flex: 1;
   margin: 3px 0;
 }
+
 .topBorder {
   height: 5px;
 }
 .bottomBorder {
   height: 5px;
+}
+.editor {
+  width: 80%;
+  flex: 1;
+  margin: 0 auto;
 }
 </style>
